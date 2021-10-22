@@ -12,12 +12,22 @@ import React from "react";
 import { makeStyles } from "@mui/styles";
 
 const useStyles = makeStyles({
-  container: {
-    // marginTop: 50,
+  categoryContainer: {
+    margin: " 0 10px 0 0",
+    padding: "10px",
+    border: "1px solid #9E9E9E",
+  },
+  button: {
+    // alignItems: "center",
+    marginLeft: "80px",
   },
   table: {
+    // textAlign: "center",
+    // marginLeft: 20,
+  },
+  allcategory: {
+    marginLeft: "80px",
     textAlign: "center",
-    marginLeft: 20,
   },
 });
 
@@ -26,30 +36,42 @@ const Categories = () => {
 
   return (
     <>
-      <Box className={classes.container}>
-        <Button variant="contained">Create Blog</Button>
-        <Table>
-          <TableHead>
-            <TableRow>
-              <TableCell>All Categories</TableCell>
-            </TableRow>
-          </TableHead>
+      <Box className={classes.categoryContainer}>
+        <Box className={classes.button}>
+          <Button variant="contained">Create Blog</Button>
+        </Box>
 
-          <Box className={classes.table}>
-            <TableBody>
+        <Table>
+          <Box className={classes.allcategory}>
+            <TableHead>
               <TableRow>
-                <TableRow>
-                  <TableCell>Music</TableCell>
-                </TableRow>
-                <TableRow>
-                  <TableCell>Music</TableCell>
-                </TableRow>
-                <TableRow>
-                  <TableCell>Music</TableCell>
-                </TableRow>
+                <TableCell>All Categories</TableCell>
               </TableRow>
-            </TableBody>
+              <TableRow>
+                <TableCell>Music</TableCell>
+              </TableRow>
+              <TableRow>
+                <TableCell>Song</TableCell>
+              </TableRow>
+              <TableRow>
+                <TableCell>Song</TableCell>
+              </TableRow>
+              <TableRow>
+                <TableCell>Song</TableCell>
+              </TableRow>
+            </TableHead>
           </Box>
+
+          {/* <TableBody>
+          <TableRow>
+            <TableRow>
+              <TableCell>Music</TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell>Music</TableCell>
+            </TableRow>
+          </TableRow>
+        </TableBody> */}
         </Table>
       </Box>
     </>

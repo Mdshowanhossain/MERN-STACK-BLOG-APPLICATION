@@ -8,13 +8,15 @@ const useStyles = makeStyles({
   container: {
     display: "flex",
     marginTop: 10,
-    margin: 30,
+    margin: 10,
+    // alignItems: "center",
+    justifyContent: "space-between",
   },
   categories: {
-    flex: 1,
+    flex: 2,
   },
   post: {
-    flex: 11,
+    flex: 9,
   },
 });
 

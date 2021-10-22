@@ -7,8 +7,18 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import { makeStyles } from "@mui/styles";
 import { Box } from "@mui/system";
+import FakeData from "../FakeData/Card.js";
 
 const useStyles = makeStyles({
+  postContainer: {
+    display: "flex",
+    flexWrap: "wrap",
+    alignItems: "center",
+    justifyContent: "space-between",
+  },
+  card: {
+    margin: "0 0 20px 0",
+  },
   categories: {
     display: "flex",
     alignItems: "center",
@@ -33,7 +43,46 @@ const Post = () => {
   const url =
     "https://i.postimg.cc/8kqgsf6G/kristin-wilson-z3htkd-HUh5w-unsplash.jpg";
   return (
-    <Box>
+    <Box className={classes.postContainer}>
+      {FakeData?.map((data) => (
+        <Card className={classes.card} sx={{ maxWidth: 345 }}>
+          <CardMedia
+            component="img"
+            alt="green iguana"
+            height="140"
+            image={url}
+          />
+          <Box className={classes.categories}>
+            <Typography variant="" component="div">
+              Category: Mohammad
+            </Typography>
+            <Typography variant="" component="div">
+              Author:Sohan
+            </Typography>
+          </Box>
+
+          <CardContent>
+            <Typography
+              className={classes.title}
+              gutterBottom
+              variant="h5"
+              component="div"
+            >
+              What is Lorem Ipsum?
+            </Typography>
+            <Typography variant="body2" color="text.secondary">
+              Lizards are a widespread group of squamate reptiles, with over
+              6,000 species, ranging across all continents except Antarctica
+            </Typography>
+          </CardContent>
+          <CardActions className={classes.read}>
+            <Button size="small">Share</Button>
+            <Button size="small">Learn More</Button>
+          </CardActions>
+        </Card>
+      ))}
+
+      {/*       
       <Card sx={{ maxWidth: 345 }}>
         <CardMedia
           component="img"
@@ -70,6 +119,78 @@ const Post = () => {
           <Button size="small">Learn More</Button>
         </CardActions>
       </Card>
+      <Card sx={{ maxWidth: 345 }}>
+        <CardMedia
+          component="img"
+          alt="green iguana"
+          height="140"
+          image={url}
+        />
+
+        <Box className={classes.categories}>
+          <Typography variant="" component="div">
+            Category: Mohammad
+          </Typography>
+          <Typography variant="" component="div">
+            Author:Sohan
+          </Typography>
+        </Box>
+
+        <CardContent>
+          <Typography
+            className={classes.title}
+            gutterBottom
+            variant="h5"
+            component="div"
+          >
+            What is Lorem Ipsum?
+          </Typography>
+          <Typography variant="body2" color="text.secondary">
+            Lizards are a widespread group of squamate reptiles, with over 6,000
+            species, ranging across all continents except Antarctica
+          </Typography>
+        </CardContent>
+        <CardActions className={classes.read}>
+          <Button size="small">Share</Button>
+          <Button size="small">Learn More</Button>
+        </CardActions>
+      </Card>
+      <Card sx={{ maxWidth: 345 }}>
+        <CardMedia
+          component="img"
+          alt="green iguana"
+          height="140"
+          image={url}
+        />
+
+        <Box className={classes.categories}>
+          <Typography variant="" component="div">
+            Category: Mohammad
+          </Typography>
+          <Typography variant="" component="div">
+            Author:Sohan
+          </Typography>
+        </Box>
+
+        <CardContent>
+          <Typography
+            className={classes.title}
+            gutterBottom
+            variant="h5"
+            component="div"
+          >
+            What is Lorem Ipsum?
+          </Typography>
+          <Typography variant="body2" color="text.secondary">
+            Lizards are a widespread group of squamate reptiles, with over 6,000
+            species, ranging across all continents except Antarctica
+          </Typography>
+        </CardContent>
+        <CardActions className={classes.read}>
+          <Button size="small">Share</Button>
+          <Button size="small">Learn More</Button>
+        </CardActions>
+      </Card> */}
     </Box>
   );
 };
