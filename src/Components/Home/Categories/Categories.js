@@ -11,6 +11,7 @@ import { Box } from "@mui/system";
 import React from "react";
 import { makeStyles } from "@mui/styles";
 import { Link } from "react-router-dom";
+import { Category } from "../FakeData/Catagory";
 
 const useStyles = makeStyles({
   categoryContainer: {
@@ -30,6 +31,9 @@ const useStyles = makeStyles({
     marginLeft: "80px",
     textAlign: "center",
   },
+  link: {
+    textDecoration: "none",
+  },
 });
 
 const Categories = () => {
@@ -48,33 +52,20 @@ const Categories = () => {
           <Box className={classes.allcategory}>
             <TableHead>
               <TableRow>
-                <TableCell>All Categories</TableCell>
+                <Link className={classes.link} to="/">
+                  <TableCell>All Categories</TableCell>
+                </Link>
               </TableRow>
-              <TableRow>
-                <TableCell>Music</TableCell>
-              </TableRow>
-              <TableRow>
-                <TableCell>Song</TableCell>
-              </TableRow>
-              <TableRow>
-                <TableCell>Song</TableCell>
-              </TableRow>
-              <TableRow>
-                <TableCell>Song</TableCell>
-              </TableRow>
+
+              {Category.map((data, index) => (
+                <TableRow key={index}>
+                  <Link className={classes.link} to={`category=${data}`}>
+                    <TableCell>{data}</TableCell>
+                  </Link>
+                </TableRow>
+              ))}
             </TableHead>
           </Box>
-
-          {/* <TableBody>
-          <TableRow>
-            <TableRow>
-              <TableCell>Music</TableCell>
-            </TableRow>
-            <TableRow>
-              <TableCell>Music</TableCell>
-            </TableRow>
-          </TableRow>
-        </TableBody> */}
         </Table>
       </Box>
     </>

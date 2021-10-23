@@ -7,9 +7,9 @@ import {
 import { makeStyles } from "@mui/styles";
 import { Box } from "@mui/system";
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
-import { createPost } from "../Apis/PostBlog.js";
+import { createPost, uploadData } from "../Apis/PostBlog.js";
 import { useHistory } from "react-router";
 
 const useStyles = makeStyles({
@@ -34,7 +34,7 @@ const useStyles = makeStyles({
 const initialValues = {
   title: "",
   description: "",
-  image: Math.round(Math.random() * 17) || "",
+  image: "",
   username: "",
   category: "",
   createdDate: new Date(),
@@ -46,7 +46,7 @@ const CreatePost = () => {
     "https://i.postimg.cc/8kqgsf6G/kristin-wilson-z3htkd-HUh5w-unsplash.jpg";
 
   const [post, setPost] = useState(initialValues);
-
+  const [file, setFile] = useState("");
   const history = useHistory();
 
   const handleChange = (e) => {
@@ -57,6 +57,23 @@ const CreatePost = () => {
     await createPost(post);
     history.push("/");
   };
+
+  const getImage = async () => {
+    console.log(file);
+    if (file) {
+      const data = new FormData();
+      data.append("name", file.name);
+      data.append("file", file);
+
+      const image = await uploadData(data);
+      post.image = image.data;
+      console.log(post.image);
+    }
+  };
+
+  useEffect(() => {
+    getImage();
+  }, [file]);
 
   return (
     <>
@@ -72,7 +89,20 @@ const CreatePost = () => {
             marginTop: "15px",
           }}
         >
-          <AddCircleOutlineIcon fontSize="large" color="action" />
+          <label htmlFor="fileInput">
+            <AddCircleOutlineIcon
+              style={{ cursor: "pointer" }}
+              fontSize="large"
+              color="action"
+            />
+          </label>
+
+          <input
+            onChange={(e) => setFile(e.target.files[0])}
+            style={{ display: "none" }}
+            type="file"
+            id="fileInput"
+          />
 
           <InputBase
             placeholder="Title"

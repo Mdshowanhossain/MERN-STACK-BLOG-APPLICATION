@@ -53,7 +53,7 @@ const Post = () => {
   const { search } = useLocation();
 
   const fetchData = async () => {
-    let data = await getAllPost();
+    let data = await getAllPost(search);
     setPosts(data.data);
     console.log(data.data);
   };

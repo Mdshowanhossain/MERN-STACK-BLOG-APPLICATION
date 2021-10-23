@@ -96,7 +96,7 @@ const DetailView = ({ match }) => {
         </Box>
 
         <Box className={classes.data}>
-          <Link className={classes.link} to={`/?username=${post.username}`}>
+          <Link to={`/?username=${post.username}`} className={classes.link}>
             <Typography>
               Author:{" "}
               <span style={{ fontWeight: "bold" }}>{post.username}</span>
