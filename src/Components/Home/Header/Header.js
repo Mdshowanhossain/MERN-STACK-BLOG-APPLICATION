@@ -31,7 +31,6 @@ const Header = () => {
 
   return (
     <>
-      <Navbar />
       <Box className={classes.image}>
         <Typography>BLOG</Typography>
         <Typography>MOHAMMAD SOHAN</Typography>

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
@@ -8,7 +8,8 @@ import Typography from "@mui/material/Typography";
 import { makeStyles } from "@mui/styles";
 import { Box } from "@mui/system";
 import FakeData from "../FakeData/Card.js";
-
+import { useLocation, Link } from "react-router-dom";
+import { getAllPost } from "../../Apis/PostBlog.js";
 const useStyles = makeStyles({
   postContainer: {
     display: "flex",
@@ -34,17 +35,36 @@ const useStyles = makeStyles({
     display: "flex",
     alignItems: "center",
     justifyContent: "space-between",
+    "& :first-child": {
+      textDecoration: "none",
+    },
+    "& :last-child": {
+      textDecoration: "none",
+    },
   },
 });
 
 const Post = () => {
   const classes = useStyles();
-
   const url =
     "https://i.postimg.cc/8kqgsf6G/kristin-wilson-z3htkd-HUh5w-unsplash.jpg";
+
+  const [posts, setPosts] = useState();
+  const { search } = useLocation();
+
+  const fetchData = async () => {
+    let data = await getAllPost();
+    setPosts(data.data);
+    console.log(data.data);
+  };
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+
   return (
     <Box className={classes.postContainer}>
-      {FakeData?.map((data) => (
+      {posts?.map((data) => (
         <Card className={classes.card} sx={{ maxWidth: 345 }}>
           <CardMedia
             component="img"
@@ -54,143 +74,52 @@ const Post = () => {
           />
           <Box className={classes.categories}>
             <Typography variant="" component="div">
-              Category: Mohammad
+              Category: {data.category}
             </Typography>
             <Typography variant="" component="div">
-              Author:Sohan
+              Author:{data.username}
             </Typography>
           </Box>
 
           <CardContent>
+            <Box>
+              <Typography
+                className={classes.title}
+                gutterBottom
+                variant="h5"
+                component="div"
+                style={{
+                  whiteSpace: "nowrap",
+                  overflow: "hidden",
+                  textOverflow: "ellipsis",
+                }}
+              >
+                {data.title}
+              </Typography>
+            </Box>
+
             <Typography
-              className={classes.title}
-              gutterBottom
-              variant="h5"
-              component="div"
+              variant="body2"
+              color="text.secondary"
+              style={{
+                whiteSpace: "nowrap",
+                overflow: "hidden",
+                textOverflow: "ellipsis",
+              }}
             >
-              What is Lorem Ipsum?
-            </Typography>
-            <Typography variant="body2" color="text.secondary">
-              Lizards are a widespread group of squamate reptiles, with over
-              6,000 species, ranging across all continents except Antarctica
+              {data.description}
             </Typography>
           </CardContent>
           <CardActions className={classes.read}>
-            <Button size="small">Share</Button>
-            <Button size="small">Learn More</Button>
+            <Link to={`/readmore/${data._id}`}>
+              <Button size="small">Share</Button>
+            </Link>
+            <Link to={`/readmore/${data._id}`}>
+              <Button size="small">Read More</Button>
+            </Link>
           </CardActions>
         </Card>
       ))}
-
-      {/*       
-      <Card sx={{ maxWidth: 345 }}>
-        <CardMedia
-          component="img"
-          alt="green iguana"
-          height="140"
-          image={url}
-        />
-
-        <Box className={classes.categories}>
-          <Typography variant="" component="div">
-            Category: Mohammad
-          </Typography>
-          <Typography variant="" component="div">
-            Author:Sohan
-          </Typography>
-        </Box>
-
-        <CardContent>
-          <Typography
-            className={classes.title}
-            gutterBottom
-            variant="h5"
-            component="div"
-          >
-            What is Lorem Ipsum?
-          </Typography>
-          <Typography variant="body2" color="text.secondary">
-            Lizards are a widespread group of squamate reptiles, with over 6,000
-            species, ranging across all continents except Antarctica
-          </Typography>
-        </CardContent>
-        <CardActions className={classes.read}>
-          <Button size="small">Share</Button>
-          <Button size="small">Learn More</Button>
-        </CardActions>
-      </Card>
-      <Card sx={{ maxWidth: 345 }}>
-        <CardMedia
-          component="img"
-          alt="green iguana"
-          height="140"
-          image={url}
-        />
-
-        <Box className={classes.categories}>
-          <Typography variant="" component="div">
-            Category: Mohammad
-          </Typography>
-          <Typography variant="" component="div">
-            Author:Sohan
-          </Typography>
-        </Box>
-
-        <CardContent>
-          <Typography
-            className={classes.title}
-            gutterBottom
-            variant="h5"
-            component="div"
-          >
-            What is Lorem Ipsum?
-          </Typography>
-          <Typography variant="body2" color="text.secondary">
-            Lizards are a widespread group of squamate reptiles, with over 6,000
-            species, ranging across all continents except Antarctica
-          </Typography>
-        </CardContent>
-        <CardActions className={classes.read}>
-          <Button size="small">Share</Button>
-          <Button size="small">Learn More</Button>
-        </CardActions>
-      </Card>
-      <Card sx={{ maxWidth: 345 }}>
-        <CardMedia
-          component="img"
-          alt="green iguana"
-          height="140"
-          image={url}
-        />
-
-        <Box className={classes.categories}>
-          <Typography variant="" component="div">
-            Category: Mohammad
-          </Typography>
-          <Typography variant="" component="div">
-            Author:Sohan
-          </Typography>
-        </Box>
-
-        <CardContent>
-          <Typography
-            className={classes.title}
-            gutterBottom
-            variant="h5"
-            component="div"
-          >
-            What is Lorem Ipsum?
-          </Typography>
-          <Typography variant="body2" color="text.secondary">
-            Lizards are a widespread group of squamate reptiles, with over 6,000
-            species, ranging across all continents except Antarctica
-          </Typography>
-        </CardContent>
-        <CardActions className={classes.read}>
-          <Button size="small">Share</Button>
-          <Button size="small">Learn More</Button>
-        </CardActions>
-      </Card> */}
     </Box>
   );
 };

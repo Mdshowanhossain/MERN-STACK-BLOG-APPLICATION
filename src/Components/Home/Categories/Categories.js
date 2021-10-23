@@ -10,12 +10,13 @@ import {
 import { Box } from "@mui/system";
 import React from "react";
 import { makeStyles } from "@mui/styles";
+import { Link } from "react-router-dom";
 
 const useStyles = makeStyles({
   categoryContainer: {
     margin: " 0 10px 0 0",
     padding: "10px",
-    border: "1px solid #9E9E9E",
+    border: "1px solid #878787",
   },
   button: {
     // alignItems: "center",
@@ -38,7 +39,9 @@ const Categories = () => {
     <>
       <Box className={classes.categoryContainer}>
         <Box className={classes.button}>
-          <Button variant="contained">Create Blog</Button>
+          <Link style={{ textDecoration: "none" }} to="/createpost">
+            <Button variant="contained">Create Blog</Button>
+          </Link>
         </Box>
 
         <Table>
