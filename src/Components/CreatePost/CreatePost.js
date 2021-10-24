@@ -34,7 +34,7 @@ const useStyles = makeStyles({
 const initialValues = {
   title: "",
   description: "",
-  image: "",
+  image: Date.now(),
   username: "",
   category: "",
   createdDate: new Date(),
@@ -42,11 +42,13 @@ const initialValues = {
 
 const CreatePost = () => {
   const classes = useStyles();
-  const url =
-    "https://i.postimg.cc/8kqgsf6G/kristin-wilson-z3htkd-HUh5w-unsplash.jpg";
+  const url = post.image
+    ? post.image
+    : "https://i.postimg.cc/8kqgsf6G/kristin-wilson-z3htkd-HUh5w-unsplash.jpg";
 
   const [post, setPost] = useState(initialValues);
   const [file, setFile] = useState("");
+  const [image, setImage] = useState("");
   const history = useHistory();
 
   const handleChange = (e) => {
@@ -67,6 +69,7 @@ const CreatePost = () => {
 
       const image = await uploadData(data);
       post.image = image.data;
+      setImage(image.data);
       console.log(post.image);
     }
   };
